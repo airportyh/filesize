@@ -1,0 +1,32 @@
+#! /usr/bin/env node
+
+var falafel = require('falafel')
+var fs = require('fs')
+var uglify = require('uglify-js')
+
+var filename = process.argv[2]
+
+console.log(filename)
+
+var code = fs.readFileSync(filename) + ''
+
+code = '' + falafel(code, {comment: true}, function(node){
+  if (node.comments){
+    node.comments.forEach(function(comment){
+      comment.update('')
+    })
+  }
+})
+
+console.log('LOC with comments striped:', loc(code))
+
+console.log('Minified size:', (minifiedBytes(filename) / 1000).toFixed(1) + 'k')
+
+function loc(str){
+  str = String(str)
+  return str.split('\n').length
+}
+
+function minifiedBytes(filename){
+  return uglify.minify([filename]).code.length
+}
