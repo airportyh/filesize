@@ -1,0 +1,18 @@
+{
+  "name": "filesize",
+  "version": "0.0.0",
+  "description": "Calculate file size for Javascript files.",
+  "bin": {
+    "filesize": "bin/filesize"
+  },
+  "dependencies": {
+    "falafel": "~0.3.1",
+    "uglify-js": "~2.4.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Toby Ho",
+  "license": "MIT"
+}
