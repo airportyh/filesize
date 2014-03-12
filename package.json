@@ -1,9 +1,9 @@
 {
-  "name": "filesize",
+  "name": "filesum",
   "version": "0.0.0",
   "description": "Calculate file size for Javascript files.",
   "bin": {
-    "filesize": "bin/filesize"
+    "filesum": "bin/filesum"
   },
   "dependencies": {
     "falafel": "~0.3.1",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/airportyh/filesize.git"
+    "url": "https://github.com/airportyh/filesum.git"
   },
   "devDependencies": {},
   "scripts": {
