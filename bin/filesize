@@ -4,29 +4,40 @@ var falafel = require('falafel')
 var fs = require('fs')
 var uglify = require('uglify-js')
 
-var filename = process.argv[2]
+var filenames = process.argv.slice(2)
+var totalLoc = 0
 
-console.log(filename)
+filenames.forEach(function(filename){
 
-var code = fs.readFileSync(filename) + ''
+  var code = fs.readFileSync(filename) + ''
 
-code = '' + falafel(code, {comment: true}, function(node){
-  if (node.comments){
-    node.comments.forEach(function(comment){
-      comment.update('')
-    })
-  }
+  code = '' + falafel(code, {comment: true}, function(node){
+    if (node.comments){
+      node.comments.forEach(function(comment){
+        comment.update('')
+      })
+    }
+  })
+
+  code = stripEmptyLines(code)
+  totalLoc += loc(code)
+
 })
 
-console.log('LOC with comments striped:', loc(code))
+console.log('LOC with comments striped:', totalLoc)
 
-console.log('Minified size:', (minifiedBytes(filename) / 1000).toFixed(1) + 'k')
+console.log('Minified size:', (minifiedBytes(filenames) / 1000).toFixed(1) + 'k')
 
 function loc(str){
-  str = String(str)
   return str.split('\n').length
 }
 
-function minifiedBytes(filename){
-  return uglify.minify([filename]).code.length
+function stripEmptyLines(str){
+  return str.split('\n').filter(function(line){
+    return line.trim().length > 0
+  }).join('\n')
+}
+
+function minifiedBytes(filenames){
+  return uglify.minify(filenames).code.length
 }
