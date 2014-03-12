@@ -9,6 +9,10 @@
     "falafel": "~0.3.1",
     "uglify-js": "~2.4.12"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/airportyh/filesize.git"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
